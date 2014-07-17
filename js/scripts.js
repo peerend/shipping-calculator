@@ -34,3 +34,71 @@ myPackage.packageWeight(10);
 myPackage.packageDimensions(5,5,5);
 myPackage.packageDistance(100,-100);
 console.log(myPackage.packageDistance(100,-110));
+
+$(document).ready(function(){
+  var missingCoin = -1;
+  $('select[name=missingCoinSelector]').change(function () {
+    if ($(this).val() === 'Quarters') {
+      missingCoin = 0;
+    } else if ($(this).val() === 'Dimes') {
+      missingCoin = 1;
+    } else if ($(this).val() === 'Nickels') {
+      missingCoin = 2;
+    } else missingCoin = -1;
+  })
+
+  $('form#coinCounter').submit(function(event){
+    var change =$('#userChange').val();
+    var moneyBack =changeMaker(change,missingCoin); //,missingCoin
+    $('.moneyBack').text(moneyBack);
+    $('#result').show(400);
+    event.preventDefault();
+  });
+
+  $('select[name=coinMissing]').change(function () {
+    if ($(this).val() === 'Yes') {
+      $('#missingCoinSelector').show(400);
+    } else {
+      $('#missingCoinSelector').hide(400);
+      missingCoin=-1;
+    }
+  });
+  return missingCoin;
+  event.preventDefault();
+});
+
+
+$(document).ready(function(){
+  var missingCoin = -1;
+  $('select[name=missingCoinSelector]').change(function () {
+    if ($(this).val() === 'Quarters') {
+      missingCoin = 0;
+    } else if ($(this).val() === 'Dimes') {
+      missingCoin = 1;
+    } else if ($(this).val() === 'Nickels') {
+      missingCoin = 2;
+    } else missingCoin = -1;
+  })
+
+  $('form#coinCounter').submit(function(event){
+    var change =$('#userChange').val();
+    var moneyBack =changeMaker(change,missingCoin); //,missingCoin
+    $('.moneyBack').text(moneyBack);
+    $('#result').show(400);
+    event.preventDefault();
+  });
+
+  $('select[name=coinMissing]').change(function () {
+    if ($(this).val() === 'Yes') {
+      $('#missingCoinSelector').show(400);
+    } else {
+      $('#missingCoinSelector').hide(400);
+      missingCoin=-1;
+    }
+  });
+  return missingCoin;
+  event.preventDefault();
+});
+
+
+
