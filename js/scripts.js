@@ -18,3 +18,4 @@ var ShippingCalc = {
     this.volume = length * width * height;
   }
 };
+
