@@ -3,6 +3,7 @@ var Package = {
   mass: 1,
   volume: 1,
   distance: 0,
+  cost: 0,
   packageClass: function(classSelect){
     if (classSelect === 'Slip Stream') {
       this.classMultiplier = 3;
@@ -10,7 +11,7 @@ var Package = {
       this.classMultiplier = 2;
     } else if (classSelect === 'Impulse Drive') {
       this.classMultiplier = 1;
-    } else alert("You've broken the hyperdrive!");
+    }
   },
   packageWeight: function(weight){
     this.mass = this.mass * weight;
@@ -26,79 +27,40 @@ var Package = {
     transdimensional = Math.pow(10,10),
     this.distance = Math.abs(to-from);
   },
+  packageCost: function(){
+    this.cost = (this.mass + this.volume) * this.distance * this.classMultiplier;
+  }
 };
 
-var myPackage = Object.create(Package);
-myPackage.packageClass('Slip Stream');
-myPackage.packageWeight(10);
-myPackage.packageDimensions(5,5,5);
-myPackage.packageDistance(100,-100);
-console.log(myPackage.packageDistance(100,-110));
-
 $(document).ready(function(){
-  var missingCoin = -1;
-  $('select[name=missingCoinSelector]').change(function () {
-    if ($(this).val() === 'Quarters') {
-      missingCoin = 0;
-    } else if ($(this).val() === 'Dimes') {
-      missingCoin = 1;
-    } else if ($(this).val() === 'Nickels') {
-      missingCoin = 2;
-    } else missingCoin = -1;
-  })
+  $('form#shippingCalc').submit(function(event){
 
-  $('form#coinCounter').submit(function(event){
-    var change =$('#userChange').val();
-    var moneyBack =changeMaker(change,missingCoin); //,missingCoin
-    $('.moneyBack').text(moneyBack);
+  var myPackage = Object.create(Package);
+  var from = $('#userFrom').val();
+  console.log(from);
+  var to = $('#userTo').val();
+  console.log(to);
+  var weight = $('#weight').val();
+  console.log(weight);
+  var length = $('#length').val();
+  console.log(length);
+  var width = $('#width').val();
+  var height = $('#height').val();
+  var classSelect = $('#packageClass').val();
+
+  console.log(myPackage.cost);
+  myPackage.cost();
+  console.log(myPackage.cost);
+
+
+    $('#totalCost').text(cost);
     $('#result').show(400);
     event.preventDefault();
-  });
 
-  $('select[name=coinMissing]').change(function () {
-    if ($(this).val() === 'Yes') {
-      $('#missingCoinSelector').show(400);
-    } else {
-      $('#missingCoinSelector').hide(400);
-      missingCoin=-1;
-    }
-  });
-  return missingCoin;
+
+  return cost;
   event.preventDefault();
-});
-
-
-$(document).ready(function(){
-  var missingCoin = -1;
-  $('select[name=missingCoinSelector]').change(function () {
-    if ($(this).val() === 'Quarters') {
-      missingCoin = 0;
-    } else if ($(this).val() === 'Dimes') {
-      missingCoin = 1;
-    } else if ($(this).val() === 'Nickels') {
-      missingCoin = 2;
-    } else missingCoin = -1;
-  })
-
-  $('form#coinCounter').submit(function(event){
-    var change =$('#userChange').val();
-    var moneyBack =changeMaker(change,missingCoin); //,missingCoin
-    $('.moneyBack').text(moneyBack);
-    $('#result').show(400);
-    event.preventDefault();
   });
-
-  $('select[name=coinMissing]').change(function () {
-    if ($(this).val() === 'Yes') {
-      $('#missingCoinSelector').show(400);
-    } else {
-      $('#missingCoinSelector').hide(400);
-      missingCoin=-1;
-    }
-  });
-  return missingCoin;
-  event.preventDefault();
 });
-
 
 
