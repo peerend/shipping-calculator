@@ -1,6 +1,7 @@
 var ShippingCalc = {
   cost: 1,
   classMultiplier: 1,
+  volume: 1,
   shippingClass: function(classSelect){
     if (classSelect === 'Slip Stream') {
       this.classMultiplier = 3;
@@ -12,5 +13,8 @@ var ShippingCalc = {
   },
   shippingWeight: function(weight){
     this.cost = this.cost * weight;
+  },
+  shippingDimensions: function(length, width, height){
+    this.volume = length * width * height;
   }
 };
