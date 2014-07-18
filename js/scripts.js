@@ -27,32 +27,33 @@ var Package = {
                     'transdimensional':Math.pow(10,10)};
     this.distance = Math.abs(locations[to] - locations[from]);
   }
-  // packageCost: function(packageClass(weight), packageDimensions.volume, packageWeight.mass, packageDistance.distance){
-  //   console.log(this.mass);
-
-  //   console.log(typeof this.mass);
-  //   this.cost = (this.mass * this.volume) * this.distance * this.classMultiplier;
-  // }
 };
 
 $(document).ready(function(){
-  $('form#shippingCalc').submit(function(event){
-      event.preventDefault();
-      var myPackage = Object.create(Package);
-      var from = $('#userFrom').val();
-      var to = $('#userTo').val();
-      var weight = parseInt($('#weight').val());
-      var length = parseInt($('#length').val());
-      var width  = parseInt($('#width').val());
-      var height = parseInt($('#height').val());
-      var classSelect = $('#packageClass').val();
 
+  $('form#shippingCalc').submit(function(event){
+    event.preventDefault();
+    var from = $('#userFrom').val();
+    var to = $('#userTo').val();
+    var weight = parseInt($('#weight').val());
+    var length = parseInt($('#length').val());
+    var width  = parseInt($('#width').val());
+    var height = parseInt($('#height').val());
+    var classSelect = $('#packageClass').val();
+
+    var myPackage = Object.create(Package);
+
+    myPackage.packageWeight(weight);
+    myPackage.packageClass(classSelect);
+    myPackage.packageDistance(from, to);
+    myPackage.packageDimensions(length, width, height);
+
+    var cost = Math.pow((myPackage.distance  * myPackage.mass
+               * myPackage.volume), myPackage.classMultiplier)*.0001;
 
     $('#totalCost').text(cost);
     $('#result').show(400);
-
-
-    return cost;
-
   });
 });
+
+

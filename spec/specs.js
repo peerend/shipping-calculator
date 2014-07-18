@@ -27,12 +27,5 @@ describe("Package", function(){
       testPackage.distance.should.equal(10000001000);
     });
   });
-    describe("packageCost", function(){
-    it("method to determine the cost of shipping", function(){
-      var testPackage = Object.create(Package);
-      testPackage.packageCost(packageClass.classMultiplier, packageDimensions.volume, packageWeight.mass, packageDistance.distance);
-      testPackage.packageCost.should.equal(10000001000);
-    });
-  });
 });
 
