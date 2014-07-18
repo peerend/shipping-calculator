@@ -26,7 +26,12 @@ var Package = {
                     'gamma': -2500,
                     'transdimensional':Math.pow(10,10)};
     this.distance = Math.abs(locations[to] - locations[from]);
-  }
+  },
+  packageCost : function(){
+    this.cost = Math.pow((this.distance  * this.mass * this.volume),
+                this.classMultiplier)*.0001;
+ }
+
 };
 
 $(document).ready(function(){
@@ -47,9 +52,11 @@ $(document).ready(function(){
     myPackage.packageClass(classSelect);
     myPackage.packageDistance(from, to);
     myPackage.packageDimensions(length, width, height);
+    myPackage.packageCost();
 
-    var cost = Math.pow((myPackage.distance  * myPackage.mass
-               * myPackage.volume), myPackage.classMultiplier)*.0001;
+    var cost = myPackage.cost;
+    // var cost = Math.pow((myPackage.distance  * myPackage.mass
+    //            * myPackage.volume), myPackage.classMultiplier)*.0001;
 
     $('#totalCost').text(cost);
     $('#result').show(400);
